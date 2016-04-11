@@ -1,0 +1,139 @@
+<div class="row">
+	<div class="col-md-12">
+		<h1>Create New Recipe</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+	Create your recipe here
+		<form>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="recipeName">Name of Recipe</label>
+						<input type="text" class="form-control" id="recipeName" ng-model="newRecipeName" placeholder="Enter Recipe Name Here">
+						<br/>
+						<label for="recipeAuthor">Your Name</label>
+						<input type="text" class="form-control" ng-model="newRecipeAuthor" placeholder="Your Name Here">
+					</div>
+				</div>
+				<hr/>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="recipeMainImage">Recipe Image</label>
+						<input type="file" id="newRecipeMainImage" ng-model="newRecipeMainImage">
+						<p class="help-block">Please choose a high-quality image for this!</p>
+					</div>
+				</div>
+				<div class="col-md-6" ng-show="newRecipeMainImage">
+					<label for="newRecipeMainImage">Preview Image</label>
+					<p>Preview of Image</p>
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="recipeAbout">About</label>
+						<textarea class="form-control" id="recipeAbout" ng-model="newRecipeAbout" placeholder="Enter a few words here to describe the recipe"></textarea>
+					</div>
+				</div>
+			</div>
+			<hr/>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group form-inline">
+						<label for="recipeIngredients">Ingredients</label>
+						<br/>
+						<div class="form-group">
+							<input type="number" class="form-control" ng-model="ingredientAmount" placeholder="Amount">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" ng-model="ingredientUnit" placeholder="Units">
+						</div>	
+						<div class="form-group">
+							<input type="text" class="form-control" ng-model="ingredientName" id="recipeIngredient" placeholder="Ingredient">
+						</div>
+						<button type="button" class="btn btn-sm btn-success" ng-click="addIngredient()"><strong>&nbsp;+&nbsp;</strong></button>
+					</div>
+				</div>
+				<div class="col-md-6" ng-show="newIngredient">
+					<label for="newRecipe.Ingredients">List of Ingredients</label>
+					<ul>
+						<li ng-repeat="ingredient in ingredientArray">
+							{{ingredient.name}} - {{ingredient.amount}} {{ingredient.units}} <button type="button" class="btn btn-sm btn-danger" ng-click="removeIngredient(ingredient)">&nbsp;x&nbsp;</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<hr/>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="recipeStep">Method</label>
+						<textarea class="form-control" ng-model="recipeStep.how" id="recipeMethod" placeholder="Please list steps with as much detail as possible."></textarea>
+						
+					</div>
+					<div class="form-group form-inline">
+						<div class="col-md-4">
+							<label for="hasTimer">Does this step have a timer?</label>
+							<br/>
+							<input type="checkbox" id="hasTimer" ng-model="hasTimer">
+							<br/>
+							<div class="input-group" ng-show="hasTimer">
+						      	<input type="number" class="form-control" ng-model="Time" aria-label="...">
+						      	<div class="input-group-btn" ng-show="hasTimer">
+						        	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{UnitSelector}} <span class="caret"></span></button>
+						        	<ul class="dropdown-menu dropdown-menu-right">
+						          		<li ng-model="Timer.Units">Secs</li>
+						          		<li ng-model="Timer.Units">Mins</li>
+						          		<li ng-model="Timer.Units">Hours</li>
+						        	</ul>
+						      	</div>
+						    </div>
+						</div>
+						<div class="col-md-4">
+							<label for="hasImage" id="hasImage" ng-model="hasImage">Does this step have an image?</label>
+							<br/>
+							<input type="checkbox" id="hasImage" ng-model="hasImage">
+							<br/>
+							<input type="file" class="form-control" ng-show="methodStep.methodImage">
+
+						</div>
+						<br/>
+						<button type="button" class="btn btn-sm btn-secondary" ng-click="addStep()">Save And Add Another Step</button>
+					</div>
+				</div>
+			</div>
+			<div class="row" ng-show="newRecipe.Method">
+				<div class="col-md-12">
+					<label for="newRecipe.Method">Preview of Method</label>
+					<p class="help-block">Create preview pane of what step will look like (include image)</p>
+				</div>
+			</div>	
+			<br/>
+			<hr/>
+			<br/>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="col-md-4">
+						<button type="button" class="btn btn-block btn-lg btn-danger">Clear Recipe</button>
+					</div>
+					<div class="col-md-4">
+						<button type="button" class="btn btn-block btn-lg btn-success" ng-click="createRecipe()">Create Recipe</button>
+					</div>
+					<div class="col-md-4">
+						<button type="button" class="btn btn-block btn-lg btn-secondary">Save for Later</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-6">
+		Live preview
+		<div class="row">
+			<div class="col-md-12">
+				<h1><strong>Name: </strong>{{newRecipeName}}</h1>
+				<p class="lead"><strong>Author: </strong>{{newRecipeAuthor}}</p>
+			</div>
+		</div>
+	</div>
+</div>
